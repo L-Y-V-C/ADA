@@ -18,12 +18,16 @@ void sort(std::vector<int>& A) {
 }
 
 // Metodo solucionador -------------------------------------------------------------------
-void fillVessel(int K, std::vector<int>& P, std::vector<int>& S, int& conteinerQuantity) {
+void fillVessel(int K, std::vector<int>& P, std::vector<float>& S) {
     for (int i = 0; i < P.size(); i++) {
         if (P[i] <= K) {
             S[i] += 1;
-            conteinerQuantity++;
             K -= P[i];
+        }
+        else {
+            S[i] += ((float)K / P[i]);
+            K -= S[i] * P[i];
+            break;
         }
     }
 }
@@ -32,17 +36,20 @@ void fillVessel(int K, std::vector<int>& P, std::vector<int>& S, int& conteinerQ
 int
 main()
 {
-    int K = 50;
-    int conteinerQuantity = 0;
+    int K = 55;
 
     std::vector<int> P;
     P.push_back(20); P.push_back(30); P.push_back(10); P.push_back(20); P.push_back(40); P.push_back(10);
-    std::vector<int> S(P.size());
+    std::vector<float> S(P.size());
     sort(P);
 
-    fillVessel(K, P, S, conteinerQuantity);
+    fillVessel(K, P, S);
     printf("Peso del buque : %d\n\n", K);
+    printf("P : [ ");
     for (int i = 0; i < S.size(); i++)
-        printf("( Peso: %d ) - ( Sol: %d)\n", P[i], S[i]);
-    printf("\nCantidad de contenedores: %d", conteinerQuantity);
+        printf("%d\t", P[i]);
+    printf("]\nS : [ ");
+    for (int i = 0; i < S.size(); i++)
+        printf("%.2f\t", S[i]);
+    printf("]\n");
 }
