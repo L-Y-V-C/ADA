@@ -3,7 +3,8 @@
 #include <queue>
 #include <limits>
 
-struct Graph {
+class Graph {
+public:
     int n;
     std::vector<std::vector<int>> G;
     Graph(int in_n) : n(in_n), G(in_n, std::vector<int>(in_n, -1)) {}
