@@ -13,7 +13,7 @@ public:
     }
 };
 
-void primsAlgorithm(const Graph& graph) {
+void primsAlgorithm(Graph graph) {
     int n = graph.n;
     std::vector<int> key(n, std::numeric_limits<int>::max());
     std::vector<int> parent(n, -1);
